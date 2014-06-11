@@ -35,9 +35,7 @@ sendMessage = function(message){
       }, onError);*/
 	  setMessage("Error mEssage sent: Session is null, please connect to reciever first.");
 	}
-
-
-}
+};
 
 sessionUpdateListener_ = function(isAlive) {
 	var message = isAlive ? 'Session Updated' : 'Session Removed';
