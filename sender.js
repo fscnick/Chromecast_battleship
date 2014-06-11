@@ -3,26 +3,27 @@
 /** @const */
 var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 var APP_ID = 'BDF10103';
+window.castObj=null;
+
+update =function () {
+		window.castObj.sendMessage($("#inputText").val()).bind(window.castObj);
+};
 
 CastSender = function() {
 	
 	this.session=null;
 };
 
-CastSender.prototype.setMessage	= function( message ){
+setMessage	= function( message ){
 	$("#textarea").append( message + "\n" );
 };
 
-CastSender.prototype.update =function () {
-	this.sendMessage($("#inputText").val()).bind(this);
-};
-
 CastSender.prototype.sendMessageOnSuccess = function (message){
-	this.setMessage("Success Message sent: " + JSON.stringify(message));
+	setMessage("Success Message sent: " + JSON.stringify(message));
 };
 
 CastSender.prototype.sendMessageOnError = function (message){
-	this.setMessage("Error Message sent: " + JSON.stringify(message));
+	setMessage("Error Message sent: " + JSON.stringify(message));
 };
 
 CastSender.prototype.sendMessage = function(message){
@@ -34,14 +35,14 @@ CastSender.prototype.sendMessage = function(message){
         window.session_ = e;
         window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
       }, onError);*/
-	  this.setMessage("Error mEssage sent: Session is null, please connect to reciever first.");
+	  setMessage("Error mEssage sent: Session is null, please connect to reciever first.");
 	}
 };
 
 CastSender.prototype.sessionUpdateListener = function(isAlive) {
 	var message = isAlive ? 'Session Updated' : 'Session Removed';
 	message += ': ' + this.session.sessionId;
-	this.setMessage(message);
+	setMessage(message);
 	
 	if (!isAlive) {
 		this.session = null;
@@ -49,11 +50,11 @@ CastSender.prototype.sessionUpdateListener = function(isAlive) {
 };
 
 CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
-	this.setMessage("Got message: " + namespace + " " + messageString);
+	setMessage("Got message: " + namespace + " " + messageString);
 };
 
 CastSender.prototype.sessionListener = function(e)	{
-	this.setMessage('New session ID: ' + e.sessionId);
+	setMessage('New session ID: ' + e.sessionId);
 	
 	// save it as a global variable
 	this.session = e;
@@ -63,15 +64,15 @@ CastSender.prototype.sessionListener = function(e)	{
 };
 
 CastSender.prototype.receiverListener = function(e) {
-	this.setMessage('receiver listener: ' + e);
+	setMessage('receiver listener: ' + e);
 };
 
 CastSender.prototype.onInitSuccess = function() {
-  this.setMessage("onInitSuccess");
+  setMessage("onInitSuccess");
 };
 
 CastSender.prototype.onError = function(message) {
-  this.setMessage("onError: "+JSON.stringify(message));
+  setMessage("onError: "+JSON.stringify(message));
 };
 
 CastSender.prototype.initializeCastApi = function() {
@@ -92,10 +93,10 @@ CastSender.prototype.initializeCastApi = function() {
 
 window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
 	if (loaded) {
-		castObj= new CastSender();
-		castObj.initializeCastApi();
+		window.castObj= new CastSender();
+		window.castObj.initializeCastApi();
     } else {
-		$("#textarea").text(JSON.stringify(errorInfo));
+		setMessage("Init Error: "+JSON.stringify(errorInfo));
     }
 });
 
