@@ -4,11 +4,6 @@
 var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 var APP_ID = 'BDF10103';
 
-
-if (!chrome.cast || !chrome.cast.isAvailable) {
-  setTimeout(initializeCastApi, 1000);
-}
-
 // clear the textarea for show status message.
 $("#textarea").text();
 setMessage= function( message ){
@@ -87,5 +82,9 @@ window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
     setMessage( JSON.stringify(errorInfo) )
   }
 };
+
+if (!chrome.cast || !chrome.cast.isAvailable) {
+  setTimeout(initializeCastApi, 1000);
+}
 
 
