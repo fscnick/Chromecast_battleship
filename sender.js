@@ -28,7 +28,7 @@ CastSender.prototype.sendMessageOnError = function (message){
 
 CastSender.prototype.sendMessage = function(message){
 	if (this.session!=null) {
-		this.session.sendMessage(MSG_NAMESPACE, message, this.sendMessageOnSuccess(message).bind(this), this.sendMessageOnError.bind(this));
+		this.session.sendMessage(MSG_NAMESPACE, message, this.sendMessageOnSuccess(message), this.sendMessageOnError.bind(this));
 	}
 	else {
     /*chrome.cast.requestSession(function(e) {
@@ -68,11 +68,11 @@ CastSender.prototype.receiverListener = function(e) {
 };
 
 CastSender.prototype.onInitSuccess = function() {
-  setMessage("onInitSuccess");
+	setMessage("onInitSuccess");
 };
 
 CastSender.prototype.onError = function(message) {
-  setMessage("onError: "+JSON.stringify(message));
+	setMessage("onError: "+JSON.stringify(message));
 };
 
 CastSender.prototype.initializeCastApi = function() {
