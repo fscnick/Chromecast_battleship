@@ -14,14 +14,22 @@ update =function () {
 	sendMessage($("#inputText").text());
 };
 
+sendMessageOnSuccess = function (message){
+	setMessage("Success Message sent: " + message);
+}
+
+sendMessageOnError = function (message){
+	setMessage("Error Message sent: " + JSON.stringify(message));
+}
+
 sendMessage = function(message){
 	if (window.session_!=null) {
-    window.session_.sendMessage(MSG_NAMESPACE, message, onSuccess.bind(this, "Message sent: " + message), onError);
+    window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
   }
   else {
     chrome.cast.requestSession(function(e) {
         window.session_ = e;
-        window.session_.sendMessage(MSG_NAMESPACE, message, onSuccess.bind(this, "Message sent: " + message), onError);
+        window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
       }, onError);
   }
 
