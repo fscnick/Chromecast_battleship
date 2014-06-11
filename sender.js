@@ -15,7 +15,7 @@ update =function () {
 };
 
 sendMessageOnSuccess = function (message){
-	setMessage("Success Message sent: " + message);
+	setMessage("Success Message sent: " + JSON.stringify(message));
 }
 
 sendMessageOnError = function (message){
