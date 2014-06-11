@@ -15,13 +15,31 @@ setMessage= function( message ){
 	$("#textarea").append( message );
 };
 
+update =function () {
+	sendMessage($("#inputText").text());
+};
+
+sendMessage = function(message){
+	if (window.session_!=null) {
+    window.session_.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
+  }
+  else {
+    chrome.cast.requestSession(function(e) {
+        window.session_ = e;
+        window.session_.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
+      }, onError);
+  }
+
+
+}
+
 sessionUpdateListener_ = function(isAlive) {
 	var message = isAlive ? 'Session Updated' : 'Session Removed';
 	message += ': ' + this.session_.sessionId;
 	setMessage(message);
 	
 	if (!isAlive) {
-    session = null;
+    window.session_ = null;
   }
   
 };

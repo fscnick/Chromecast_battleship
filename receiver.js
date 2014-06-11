@@ -9,6 +9,12 @@ setMessage= function( message ){
 	$("#textarea").append( message );
 };
 
+// utility function to display the text message in the input field
+function displayText(text) {
+	setMessage(text);
+	window.castReceiverManager.setApplicationState(text);
+};
+
 window.onload = function() {
         cast.receiver.logger.setLevelValue(0);
         window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
