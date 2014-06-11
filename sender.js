@@ -16,12 +16,12 @@ update =function () {
 
 sendMessage = function(message){
 	if (window.session_!=null) {
-    window.session_.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
+    window.session_.sendMessage(MSG_NAMESPACE, message, onSuccess.bind(this, "Message sent: " + message), onError);
   }
   else {
     chrome.cast.requestSession(function(e) {
         window.session_ = e;
-        window.session_.sendMessage(namespace, message, onSuccess.bind(this, "Message sent: " + message), onError);
+        window.session_.sendMessage(MSG_NAMESPACE, message, onSuccess.bind(this, "Message sent: " + message), onError);
       }, onError);
   }
 
