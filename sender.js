@@ -93,7 +93,7 @@ CastSender.prototype.initializeCastApi = function() {
 window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
 	if (loaded) {
 		castObj= new CastSender();
-		castObj.initializeCastApi.bind(castObj);
+		castObj.initializeCastApi();
     } else {
 		$("#textarea").text(JSON.stringify(errorInfo));
     }
