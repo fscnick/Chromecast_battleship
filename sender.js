@@ -6,7 +6,7 @@ var APP_ID = 'BDF10103';
 window.castObj=null;
 
 update = function () {
-		window.castObj.sendMessage($("#inputText").val()).bind(window.castObj);
+		window.castObj.sendMessage($("#inputText").val());
 };
 
 CastSender = function() {
