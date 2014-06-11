@@ -62,7 +62,7 @@ CastSender.prototype.sessionListener = function(e)	{
 	e.addMessageListener(MSG_NAMESPACE, onReceiverMessage.bind(this));
 };
 
-CastSender.prototype.receiverListener_ = function(e) {
+CastSender.prototype.receiverListener = function(e) {
 	this.setMessage('receiver listener: ' + e);
 };
 
