@@ -5,7 +5,7 @@ var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 var APP_ID = 'BDF10103';
 window.castObj=null;
 
-update =function () {
+update = function () {
 		window.castObj.sendMessage($("#inputText").val()).bind(window.castObj);
 };
 
@@ -28,7 +28,7 @@ CastSender.prototype.sendMessageOnError = function (message){
 
 CastSender.prototype.sendMessage = function(message){
 	if (this.session!=null) {
-		this.session.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess(message).bind(this), sendMessageOnError.bind(this));
+		this.session.sendMessage(MSG_NAMESPACE, message, this.sendMessageOnSuccess(message).bind(this), this.sendMessageOnError.bind(this));
 	}
 	else {
     /*chrome.cast.requestSession(function(e) {
