@@ -22,7 +22,7 @@ sendMessageOnError = function (message){
 	setMessage("Error Message sent: " + JSON.stringify(message));
 }
 
-requestSessionOnError = function ()
+
 
 sendMessage = function(message){
 	if (window.session_!=null) {
