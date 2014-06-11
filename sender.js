@@ -11,6 +11,7 @@ setMessage= function( message ){
 };
 
 update =function () {
+	setMessage($("#inputText").val());
 	sendMessage($("#inputText").val());
 };
 
