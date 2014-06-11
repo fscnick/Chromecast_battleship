@@ -59,7 +59,7 @@ CastSender.prototype.sessionListener = function(e)	{
 	this.session = e;
 	
 	e.addUpdateListener(this.sessionUpdateListener.bind(this));
-	e.addMessageListener(MSG_NAMESPACE, onReceiverMessage.bind(this));
+	e.addMessageListener(MSG_NAMESPACE, this.onReceiverMessage.bind(this));
 };
 
 CastSender.prototype.receiverListener = function(e) {
@@ -93,7 +93,7 @@ CastSender.prototype.initializeCastApi = function() {
 window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
 	if (loaded) {
 		castObj= new CastSender();
-		castObj.initializeCastApi().bind(CastObj);
+		castObj.initializeCastApi.bind(CastObj);
     } else {
 		$("#textarea").text(JSON.stringify(errorInfo));
     }
