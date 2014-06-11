@@ -11,7 +11,6 @@ setMessage= function( message ){
 };
 
 update =function () {
-	setMessage($("#inputText").val());
 	sendMessage($("#inputText").val());
 };
 
@@ -27,7 +26,7 @@ sendMessageOnError = function (message){
 
 sendMessage = function(message){
 	if (window.session_!=null) {
-		window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
+		window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess(message), sendMessageOnError);
 	}
 	else {
     /*chrome.cast.requestSession(function(e) {
