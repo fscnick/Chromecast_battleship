@@ -7,7 +7,7 @@ var APP_ID = 'BDF10103';
 // clear the textarea for show status message.
 $("#textarea").text();
 setMessage= function( message ){
-	$("#textarea").append( message );
+	$("#textarea").append( message + "\n" );
 };
 
 update =function () {
@@ -22,16 +22,19 @@ sendMessageOnError = function (message){
 	setMessage("Error Message sent: " + JSON.stringify(message));
 }
 
+requestSessionOnError = function ()
+
 sendMessage = function(message){
 	if (window.session_!=null) {
-    window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
-  }
-  else {
-    chrome.cast.requestSession(function(e) {
+		window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
+	}
+	else {
+    /*chrome.cast.requestSession(function(e) {
         window.session_ = e;
         window.session_.sendMessage(MSG_NAMESPACE, message, sendMessageOnSuccess, sendMessageOnError);
-      }, onError);
-  }
+      }, onError);*/
+	  setMessage("Error mEssage sent: Session is null, please connect to reciever first.");
+	}
 
 
 }

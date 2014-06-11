@@ -6,7 +6,7 @@ var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 // clear the textarea for show status message.
 $("#textarea").text();
 setMessage= function( message ){
-	$("#textarea").append( message );
+	$("#textarea").append( message  + "\n"  );
 };
 
 // utility function to display the text message in the input field
