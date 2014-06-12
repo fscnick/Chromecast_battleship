@@ -20,9 +20,9 @@ CastReceiver = function() {
 	
 	//TO-DO
 	// setting callback function
-	this.castReceiverManager.onReady = this.ReceiverOnReady;
-	this.castReceiverManager.onSenderConnected = this.ReceiverOnSenderConnected;
-	this.castReceiverManager.onSenderDisconnected = this.ReceiverOnSenderDisconnected;
+	this.castReceiverManager.onReady = this.ReceiverOnReady.bind(this);
+	this.castReceiverManager.onSenderConnected = this.ReceiverOnSenderConnected.bind(this);
+	this.castReceiverManager.onSenderDisconnected = this.ReceiverOnSenderDisconnected.bind(this);
 	this.messageBus.onMessage=this.MsgBusOnMessage;
 	
 
@@ -62,7 +62,7 @@ CastReceiver.prototype= {
 	//encapsulate the message send function
 	sendMessage: function(senderId, message) {
 		this.messageBus.send(senderId, message);
-	}
+	},
 
 	MsgBusOnMessage : function(event) {
 		setMessage('Message [' + event.senderId + ']: ' + event.data);
@@ -77,6 +77,11 @@ CastReceiver.prototype= {
 
 };
 
+window.onload = function(){
+
+    window.castReceiver=new CastReceiver();
+
+};
 
 
 /*
