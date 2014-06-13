@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<script src="jquery.min.js"></script>
+		<script type="text/javascript" src="board.js"></script>
+	</head>
+	<body>aaa
+		<textarea id="textarea" rows="20" cols="70">
+			Hellow world!!
+		</textarea>
+		<script type="text/javascript">
+		window.onload = function(){
+			function showText(message){
+				$("#textarea").append(message+"\n");
+			};
+			
+			b1=new Board();
+			showText("create Board object!");
+			showText("");
+			
+			b1.setPlayerId(1);
+			b1.setIsOwner(true);
+			showText("b1 PlayerId: "+b1.getPlayerId());
+			showText("b1 IsOwner: "+b1.getIsOwner());
+			showText("");
+			
+			b1.initBoard();
+			var entireStatus=b1.getBoardEntireStatus();
+			showText("b1 EntireStatue: "+ entireStatus);
+			showText("");
+			
+			b1.placeShipOnBoard(1,2);
+			b1.placeShipOnBoard(2,3);
+			showText("b1 EntireStatue: "+ b1.getBoardEntireStatus());
+			
+			b1.throwBomb(2,3);
+			b1.throwBomb(2,2);
+			
+			showText("b1 EntireStatue: "+ b1.getBoardEntireStatus());
+			showText("");
+			
+			entireStatus=b1.getBoardEntireStatus();
+			
+			
+			b2=new Board();
+			b2.importBoard(entireStatus);
+			showText("b2 EntireStatue: "+ b2.getBoardEntireStatus());
+			showText("");
+			
+			
+		};	
+		</script>
+	</body>
+</html>
