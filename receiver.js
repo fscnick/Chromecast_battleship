@@ -72,7 +72,7 @@ CastReceiver.prototype= {
 		// inform all senders on the CastMessageBus of the incoming message event
 		// sender message listener will be invoked
 		//this.sendMessage(event.senderId, event.data);
-		this.messageBus.broadcast(event.data);
+		this.messageBus.broadcast(JSON.stringify(event.data));
 	}
 
 
