@@ -16,7 +16,8 @@ CastReceiver = function() {
 	setMessage('Starting Receiver Manager');
 	
 	// create a CastMessageBus to handle messages for a custom namespace
-	this.messageBus = this.castReceiverManager.getCastMessageBus(MSG_NAMESPACE);
+	this.messageBus = this.castReceiverManager.getCastMessageBus(MSG_NAMESPACE,
+											cast.receiver.CastMessageBus.MessageType.JSON);
 	
 	//TO-DO
 	// setting callback function
