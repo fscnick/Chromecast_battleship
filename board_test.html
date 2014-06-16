@@ -23,6 +23,7 @@
 		<textarea id="textarea" rows="20" cols="70">
 			Hellow world!!
 		</textarea><br>
+		
 		<script type="text/javascript">
 		window.onload = function(){
 			function showText(message){
@@ -62,9 +63,9 @@
 			showText("b2 EntireStatue: "+ b2.getBoardEntireStatus());
 			showText("");
 			
-			boardctl=new BoardController(b1, b2);
+			boardui=new BoardUI(b1, b2);
 			//setTimeout(boardctl.drawUI.bind(boardctl), 1000);
-			boardctl.drawUI();
+			boardUI.drawUI();
 		};	
 		</script>
 		<!--<div id="boardUI" class="wrap">

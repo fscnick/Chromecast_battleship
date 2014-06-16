@@ -108,7 +108,7 @@ Board.prototype = {
 
 }
 
-BoardController= function(board1, board2){
+BoardUI= function(board1, board2){
 	this.board1=board1;
 	this.board2=board2;
 	
@@ -131,13 +131,13 @@ BoardController= function(board1, board2){
 	
 };
 
-BoardController.prototype= {
+BoardUI.prototype= {
 	drawUI: function(){
 	
 		// set players board wrapper
 		$("#textarea").after("<br>\n"+
 								"<div id='boardUI'>\n"+
-								"</div>")
+								"</div>");
 		wrapWidth=(this.board1.getBoardLength()*2*100)+100;
 		wrapHeight=(this.board1.getBoardLength()*100)+100;
 		$("#boardUI").css({'width': wrapWidth.toString()+'px', 
