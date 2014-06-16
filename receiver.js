@@ -3,6 +3,9 @@
 /** @const */
 var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 
+// External namespace for cast specific javascript library
+var cast = window.cast || {};
+
 // clear the textarea for show status message.
 $("#textarea").text();
 setMessage= function( message ){
