@@ -24,7 +24,7 @@ CastReceiver = function() {
 	this.castReceiverManager.onReady = this.ReceiverOnReady.bind(this);
 	this.castReceiverManager.onSenderConnected = this.ReceiverOnSenderConnected.bind(this);
 	this.castReceiverManager.onSenderDisconnected = this.ReceiverOnSenderDisconnected.bind(this);
-	this.messageBus.onMessage=this.MsgBusOnMessage;
+	this.messageBus.onMessage=this.MsgBusOnMessage.bind(this);
 	
 
 	// initialize the CastReceiverManager with an application status message
