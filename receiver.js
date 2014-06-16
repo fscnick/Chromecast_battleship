@@ -28,7 +28,7 @@ CastReceiver = function() {
 	
 
 	// initialize the CastReceiverManager with an application status message
-	this.castReceiverManager.start({statusText: "Application is starting"});
+	this.castReceiverManager.start();
 	setMessage('Receiver Manager started');
 	
 };
