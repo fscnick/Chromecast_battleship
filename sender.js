@@ -18,13 +18,6 @@ setMessage	= function( message ){
 	$("#textarea").append( message + "\n" );
 };
 
-CastSender.prototype.ChannelOnReceiverMessage = function( namespace, messageString ){
-	
-	setMessage("Success Message receive: " + JSON.stringify(message));
-	
-
-}
-
 CastSender.prototype.sendMessageOnSuccess = function (message){
 	setMessage("Success Message sent: " + JSON.stringify(message));
 };
