@@ -23,7 +23,7 @@ CastReceiver = function() {
 	this.castReceiverManager.onReady = this.ReceiverOnReady.bind(this);
 	this.castReceiverManager.onSenderConnected = this.ReceiverOnSenderConnected.bind(this);
 	this.castReceiverManager.onSenderDisconnected = this.ReceiverOnSenderDisconnected.bind(this);
-	this.messageBus.onMessage=this.MsgBusOnMessage;
+	this.messageBus.onMessage=this.MsgBusOnMessage.bind(this);
 	
 
 	// initialize the CastReceiverManager with an application status message
@@ -64,6 +64,10 @@ CastReceiver.prototype= {
 		this.messageBus.send(senderId, message);
 	},
 
+	broadcastMessage: function(message){
+		this.messageBus.broadcast(message);
+	},
+
 	MsgBusOnMessage : function(event) {
 		setMessage('Message [' + event.senderId + ']: ' + event.data);
 		
@@ -72,6 +76,7 @@ CastReceiver.prototype= {
 		// inform all senders on the CastMessageBus of the incoming message event
 		// sender message listener will be invoked
 		this.sendMessage(event.senderId, event.data);
+		this.broadcastMessage(event.data);
 	}
 
 
