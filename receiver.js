@@ -3,9 +3,6 @@
 /** @const */
 var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 
-// External namespace for cast specific javascript library
-var cast = window.cast || {};
-
 // clear the textarea for show status message.
 $("#textarea").text();
 setMessage= function( message ){
@@ -19,19 +16,18 @@ CastReceiver = function() {
 	setMessage('Starting Receiver Manager');
 	
 	// create a CastMessageBus to handle messages for a custom namespace
-	this.messageBus = this.castReceiverManager.getCastMessageBus(MSG_NAMESPACE,
-											cast.receiver.CastMessageBus.MessageType.JSON);
+	this.messageBus = this.castReceiverManager.getCastMessageBus(MSG_NAMESPACE);
 	
 	//TO-DO
 	// setting callback function
 	this.castReceiverManager.onReady = this.ReceiverOnReady.bind(this);
 	this.castReceiverManager.onSenderConnected = this.ReceiverOnSenderConnected.bind(this);
 	this.castReceiverManager.onSenderDisconnected = this.ReceiverOnSenderDisconnected.bind(this);
-	this.messageBus.onMessage=this.MsgBusOnMessage.bind(this);
+	this.messageBus.onMessage=this.MsgBusOnMessage;
 	
 
 	// initialize the CastReceiverManager with an application status message
-	this.castReceiverManager.start();
+	this.castReceiverManager.start({statusText: "Application is starting"});
 	setMessage('Receiver Manager started');
 	
 };
@@ -75,8 +71,7 @@ CastReceiver.prototype= {
 		
 		// inform all senders on the CastMessageBus of the incoming message event
 		// sender message listener will be invoked
-		//this.sendMessage(event.senderId, event.data);
-		this.messageBus.broadcast(JSON.stringify(event.data));
+		this.sendMessage(event.senderId, event.data);
 	}
 
 
