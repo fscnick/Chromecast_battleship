@@ -93,9 +93,3 @@ CastReceiver.prototype= {
 
 };
 
-window.onload = function(){
-
-    window.castReceiver=new CastReceiver();
-
-};
-

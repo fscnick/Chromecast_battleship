@@ -7,6 +7,10 @@
 		<script type="text/javascript" src="board.js"></script>
 	</head>
 	<body>
+		
+		<form method="get" action="JavaScript:join(window.castSender);">
+			<input id="joinBtn" type="submit"  text="join">
+		</form><br>
 		<textarea id="textarea" rows="20" cols="70">
 		Hellow world!!
 		</textarea><br>
@@ -35,7 +39,7 @@
             window.boardui.drawUI();
 			
             // start the join procedure
-            join(window.castSender);    
+            //join(window.castSender);    
 			
 			
 			};

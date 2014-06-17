@@ -105,10 +105,10 @@ CastSender.prototype.initializeCastApi = function() {
 
 
 join = function(castSender){
-    message={'command': 'join',
+    command={'command': 'join',
              'playerId': 'None'};
              
-    castSender.sendMessage(message);
+    castSender.sendMessage(command);
     
 };
 
