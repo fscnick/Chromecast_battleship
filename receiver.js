@@ -63,29 +63,29 @@ CastReceiver.prototype= {
 	},
 
 	MsgBusOnMessage : function(event) {
-		setMessage('Message [' + event.senderId + ']: ' + event.data);
-		
-		setMessage("Get message: " + JSON.stringify(event.data));
+	    setMessage('Get Message [' + event.senderId + ']: ' + event.data);
 		
 		// inform all senders on the CastMessageBus of the incoming message event
 		// sender message listener will be invoked
 		//this.sendMessage(event.senderId, event.data);
 		//this.broadcastMessage(event.data);
         
-        if (event.data['command']== "join"){
-            
-            window.playerCount+=1;
-            if (window.playerCount>2){
-                setMessage("Game tip: too much player!!");
-                return;
-            }
-            reply={'command':"joinReply",
-                    'playerId': window.playerCount};
-            
-            this.sendMessage(event.senderId, reply);
-            setMessage("Game tip: send a join reply with playId "+window.playerCount);
+	    var message=JSON.parse(event.data);
+
+	    if (message.command == "join"){
+		setMessage("in handle join phase");
+		window.playerCount+=1;
+		if (window.playerCount>2){
+		    setMessage("Game tip: too much player!!");
+		    return;
+		}
+		reply=JSON.stringify({'command':"joinReply",
+                    'playerId': window.playerCount});
+		setMessage(reply);
+		this.sendMessage(event.senderId, reply);
+		setMessage("Game tip: send a join reply with playerId "+window.playerCount);
         
-        }
+	    }
         
         
 	}
