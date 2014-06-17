@@ -15,7 +15,10 @@
 		</form><br>
 		<script type="text/javascript">
 			window.onload= function() {
-			
+				
+				var b1=new Board();
+				var b2=new Board();
+				
 				boardui=new BoardUI(b1, b2);
 				//setTimeout(boardctl.drawUI.bind(boardctl), 1000);
 				boardui.drawUI();
