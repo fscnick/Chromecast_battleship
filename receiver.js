@@ -67,7 +67,7 @@ CastReceiver.prototype= {
 	MsgBusOnMessage : function(event) {
 		setMessage('Message [' + event.senderId + ']: ' + event.data);
 		
-		setMessage("Get message: " + JSON.stringigy(event.data));
+		setMessage("Get message: " + JSON.stringify(event.data));
 		
 		// inform all senders on the CastMessageBus of the incoming message event
 		// sender message listener will be invoked
