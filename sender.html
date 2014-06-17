@@ -4,13 +4,26 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 		<script type="text/javascript" src="sender.js"></script>
+		<script type="text/javascript" src="board.js"></script>
 	</head>
 	<body>
 		<textarea id="textarea" rows="20" cols="70">
 		Hellow world!!
-		</textarea>
+		</textarea><br>
 		<form method="get" action="JavaScript:update();">
 			<input id="inputText" type="text" size="30" text="">
-		</form>
+		</form><br>
+		<script type="text/javascript">
+			window.onload= function() {
+			
+				boardui=new BoardUI(b1, b2);
+				//setTimeout(boardctl.drawUI.bind(boardctl), 1000);
+				boardui.drawUI();
+			
+			
+			
+			
+			};
+		</script>
 	</body>
 </html>

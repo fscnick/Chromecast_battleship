@@ -108,7 +108,7 @@ Board.prototype = {
 
 }
 
-BoardController= function(board1, board2){
+BoardUI= function(board1, board2){
 	this.board1=board1;
 	this.board2=board2;
 	
@@ -131,7 +131,7 @@ BoardController= function(board1, board2){
 	
 };
 
-BoardController.prototype= {
+BoardUI.prototype= {
 	drawUI: function(){
 	
 		// set players board wrapper
