@@ -15,15 +15,27 @@
 		</form><br>
 		<script type="text/javascript">
 			window.onload= function() {
-				
-				var b1=new Board();
-				var b2=new Board();
-				
-				boardui=new BoardUI(b1, b2);
-				//setTimeout(boardctl.drawUI.bind(boardctl), 1000);
-				boardui.drawUI();
+            
+            // lunch the cast sender
+            window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
+                if (loaded) {
+                    window.castSender= new CastSender();
+                    window.castSender.initializeCastApi();
+                } else {
+                    setMessage("Init Error: "+JSON.stringify(errorInfo));
+                }
+            });
+                
 			
+            // init game board UI
+            window.b1=new Board();
+			window.b2=new Board();
+				
+			window.boardui=new BoardUI(b1, b2);
+            window.boardui.drawUI();
 			
+            // start the join procedure
+            join(window.castSender);    
 			
 			
 			};
