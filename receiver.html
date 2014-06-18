@@ -1,23 +1,23 @@
 <html>
-	<head>
-		<title>Chromecast battleship game receiver</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-		<script src="receiver.js"></script>
-	</head>
-	<body>
-		<textarea id="textarea" rows="20" cols="70">
-		Hellow world!!
-		</textarea>
-        <script type="text/javascript">
-            window.onload= function(){
-		// init cast receiver
-		window.castReceiver=new CastReceiver();
+    <head>
+    	<title>Chromecast battleship game receiver</title>
+    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    	<script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    	<script src="receiver.js"></script>
+    </head>
+    <body>
+	<textarea id="textarea" rows="20" cols="70">
+	    Hellow world!!
+        </textarea>
+	<script type="text/javascript">
+	    window.onload= function(){
+	    // init cast receiver
+	    window.castReceiver=new CastReceiver();
 
-                // init player counter, use for dispatch player 1 or player 2
-                window.playerCount=0;
+            // init player counter, use for dispatch player 1 or player 2
+            window.playerCount=0;
             
             };
         </script>
-	</body>
+    </body>
 </html>

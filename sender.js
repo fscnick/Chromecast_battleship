@@ -171,7 +171,7 @@ testAndSetShip= function(i,j){
         
         // if ships already reach the MAX, notify the receiver. 
         if (currentShipAlreadySet == window.MAXSHIPCOUNT){
-            command={'command':"setShipComplete".
+            command={'command':"setShipComplete",
                      'playerId': window.playerId,
                      'boardStatus': playerBoard.getBoardEntireStatus()};
             
@@ -206,7 +206,7 @@ testAndSetShip= function(i,j){
         
         // if ships already reach the MAX, notify the receiver. 
         if (currentShipAlreadySet == window.MAXSHIPCOUNT){
-            command={'command':"setShipComplete".
+            command={'command':"setShipComplete",
                      'playerId': window.playerId,
                      'boardStatus': playerBoard.getBoardEntireStatus()};
             

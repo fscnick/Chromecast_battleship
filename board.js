@@ -53,7 +53,7 @@ Board.prototype = {
 		return this.isOwner;
 	},
     
-    setCurrentShipCount: fucntion(count){
+    setCurrentShipCount: function(count){
         this.currentShipCount=count;
     },
     
@@ -170,20 +170,20 @@ BoardUI.prototype= {
 		$("#player1").append("<h1>player1</h1><br>");
 		$("#player2").append("<h1>player2</h1><br>");
 
-		for (i=0;i<this.board1.getBoardLength();i++){
-			for (j=0;j<this.board1.getBoardLength();j++){
-				$("#player1").append("<input type='image'"+"id='player1_"+i+j"' src='picture/point.jpg'>");
-				$("#player2").append("<input type='image'"+"id='player2_"+i+j"' src='picture/point.jpg'>");
+		for (i=0;i<window.BOARDSIZE;i++){
+			for (j=0;window.BOARDSIZE;j++){
+				$("#player1").append("<input type='image'"+"id='player1_"+i+j+"' src='picture/point.jpg'>");
+				$("#player2").append("<input type='image'"+"id='player2_"+i+j+"' src='picture/point.jpg'>");
 			}
 			$("#player1").append("<br>");
 			$("#player2").append("<br>");
 		}
 		
-	}
+	},
     
     setIconAsShip: function(iconTagID){
         $("#"+iconTagID).attr("src","picture/point.jpg");
-    }
+    },
     
     combineUIAndSetShip: function(){
     

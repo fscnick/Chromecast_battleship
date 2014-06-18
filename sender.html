@@ -1,48 +1,47 @@
 <html>
-	<head>
-		<title>Chromecast battleship game sender</title>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
-		<script type="text/javascript" src="sender.js"></script>
-		<script type="text/javascript" src="board.js"></script>
-	</head>
-	<body>
-		
-		<form method="get" action="JavaScript:join(window.castSender);">
-			<input id="joinBtn" type="submit"  value="join">
-		</form><br>
-		<textarea id="textarea" rows="20" cols="70">
-		Hellow world!!
-		</textarea><br>
-		<form method="get" action="JavaScript:update();">
-			<input id="inputText" type="text" size="30" text="">
-		</form><br>
-		<script type="text/javascript">
-			window.onload= function() {
-            
-            // lunch the cast sender
-            window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
-                if (loaded) {
-                    window.castSender= new CastSender();
-                    window.castSender.initializeCastApi();
-                } else {
-                    setMessage("Init Error: "+JSON.stringify(errorInfo));
-                }
-            });
-                
-			
-            // init game board UI
-            window.b1=new Board();
-			window.b2=new Board();
+    <head>
+	<title>Chromecast battleship game sender</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+	<script type="text/javascript" src="sender.js"></script>
+	<script type="text/javascript" src="board.js"></script>
+    </head>
+    <body>		
+	<form method="get" action="">
+	    <input id="joinBtn" type="submit"  value="join">
+	</form><br>
+	<textarea id="textarea" rows="20" cols="70">
+	    Hellow world!!
+	</textarea><br>
+	<form method="get" action="JavaScript:update();">
+	    <input id="inputText" type="text" size="30" text="">
+	</form><br>
+	<script type="text/javascript">
+	    window.onload= function() {
+
+		// lunch the cast sender
+		window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
+		    if (loaded) {
+			window.castSender= new CastSender();
+			window.castSender.initializeCastApi();
+		    } else {
+			setMessage("Init Error: "+JSON.stringify(errorInfo));
+		    }
+		});
+	
+		// init game board UI
+		window.b1=new Board();
+		window.b2=new Board();
 				
-			window.boardui=new BoardUI(b1, b2);
-            window.boardui.drawUI();
+	        window.boardui=new BoardUI(b1, b2);
+//		window.boardui.drawUI();
 			
-            // start the join procedure
-            //join(window.castSender);    
+            //join(window.ciastSender);    
+		$("#joinBtn").click(function(){
+		    join(window.castSender);
+		});	
 			
-			
-			};
+	    };
 		</script>
 	</body>
 </html>
