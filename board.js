@@ -143,43 +143,43 @@ BoardUI= function(board1, board2){
 };
 
 BoardUI.prototype= {
-	drawUI: function(){
+    drawUI: function(){
 	
-		// set players board wrapper
-		$("#textarea").after("<br>\n"+
-								"<div id='boardUI'>\n"+
-								"</div>")
-		wrapWidth=(this.board1.getBoardLength()*2*100)+100;
-		wrapHeight=(this.board1.getBoardLength()*100)+100;
-		$("#boardUI").css({'width': wrapWidth.toString()+'px', 
-							'height': wrapHeight.toString()+'px',
-							'margin': "0 auto"});
-		
-		// set palyer board column
-		$("#boardUI").append("<div id='player1'></div>"+
-								"<div id='player2'></div>");
-								
-		columnWidth=this.board1.getBoardLength()*100;
-		$("#player1").css({ 'width': columnWidth.toString(),
-							'height':wrapHeight.toString()+'px', 
-							'float': "left"});
-		$("#player2").css({ 'width': columnWidth.toString(), 
-							'height':wrapHeight.toString()+'px', 
-							'float': "right"});
-		
-		$("#player1").append("<h1>player1</h1><br>");
-		$("#player2").append("<h1>player2</h1><br>");
+	// set players board wrapper
+	$("#textarea").after("<br>\n"+
+			     "<div id='boardUI'>\n"+
+			     "</div>\n");
+	wrapWidth=(this.board1.getBoardLength()*2*100)+100;
+	wrapHeight=(this.board1.getBoardLength()*100)+100;
+	$("#boardUI").css({'width': wrapWidth.toString()+'px', 
+			   'height': wrapHeight.toString()+'px',
+			   'margin': "0 auto"});
+	
+	// set palyer board column
+	$("#boardUI").append("<div id='player1'></div>"+
+			     "<div id='player2'></div>");
+							
+	columnWidth=this.board1.getBoardLength()*100;
+	$("#player1").css({ 'width': columnWidth.toString(),
+			    'height':wrapHeight.toString()+'px', 
+			    'float': "left"});
+	$("#player2").css({ 'width': columnWidth.toString(), 
+			    'height':wrapHeight.toString()+'px', 
+			    'float': "right"});
+	
+	$("#player1").append("<h1>player1</h1><br>");
+	$("#player2").append("<h1>player2</h1><br>");
 
-		for (i=0;i<window.BOARDSIZE;i++){
-			for (j=0;window.BOARDSIZE;j++){
-				$("#player1").append("<input type='image'"+"id='player1_"+i+j+"' src='picture/point.jpg'>");
-				$("#player2").append("<input type='image'"+"id='player2_"+i+j+"' src='picture/point.jpg'>");
-			}
-			$("#player1").append("<br>");
-			$("#player2").append("<br>");
-		}
+	for (i=0;i<window.BOARDSIZE;i++){
+	    for (j=0;j<window.BOARDSIZE;j++){
+		$("#player1").append("<input type='image'"+"id='player1_"+i+j+"' src='picture/point.jpg'>");
+		$("#player2").append("<input type='image'"+"id='player2_"+i+j+"' src='picture/point.jpg'>");
+	    }
+	    $("#player1").append("<br>");
+	    $("#player2").append("<br>");
+	}
 		
-	},
+    },
     
     setIconAsShip: function(iconTagID){
         $("#"+iconTagID).attr("src","picture/point.jpg");
