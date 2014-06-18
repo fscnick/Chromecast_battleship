@@ -1,4 +1,5 @@
 window.BOARDSIZE=5;
+window.MAXSHIPCOUNT=window.BOARDSIZE;
 
 // enum board type
 var BoardStatus = {
@@ -11,6 +12,8 @@ var BoardStatus = {
 Board = function() {
 	this.playerId=-1;
 	this.isOwner=false;
+    this.currentShipCount=0;
+    
 	//this.board[window.BOARDSIZE][window.BOARDSIZE];
 	
 	//TO-DO find a intuitive way to init 2-d array
@@ -49,15 +52,23 @@ Board.prototype = {
 	getIsOwner : function() {
 		return this.isOwner;
 	},
+    
+    setCurrentShipCount: fucntion(count){
+        this.currentShipCount=count;
+    },
+    
+    getCurrentShipCount: function(){
+        return this.currentShipCount;
+    },
 	
-	setBoardStatus : function( posX, posY, status){
+	setBoardStatus : function( i, j, status){
 		//this.board[posX][posY]=status;
-		this.board[posY][posX]=status;
+		this.board[i][j]=status;
 	},
 	
-	getBoardStatus : function( posX, posY ){
+	getBoardStatus : function( i, j ){
 		//return this.board[posX][posY];
-		return this.board[posY][posX];
+		return this.board[i][j];
 	},
 	
 	getBoardEntireStatus : function(){
@@ -87,22 +98,22 @@ Board.prototype = {
 		}
 	},
 	
-	placeShipOnBoard : function( posX, posY ) {
+	placeShipOnBoard : function( i, j ) {
 		//this.setBoardStatus( posX, posY, BoardStatus.SHIP);
-		this.setBoardStatus( posY, posX, BoardStatus.SHIP);
+		this.setBoardStatus( i, j, BoardStatus.SHIP);
 	},
 	
-	throwBomb : function ( posX, posY ){
+	throwBomb : function ( i, j ){
 		//if (this.getBoardStatus( posX, posY ) == BoardStatus.SEA){
 		//	this.setBoardStatus(posX, posY, BoardStatus.MISS);
 		//}else if(this.getBoardStatus( posX, posY ) == BoardStatus.SHIP){
 		//	this.setBoardStatus(posX, posY, BoardStatus.BOOM);
 		//}
 		
-		if (this.getBoardStatus( posY, posX ) == BoardStatus.SEA){
-			this.setBoardStatus(posY, posX, BoardStatus.MISS);
-		}else if(this.getBoardStatus( posY, posX ) == BoardStatus.SHIP){
-			this.setBoardStatus(posY, posX, BoardStatus.BOOM);
+		if (this.getBoardStatus( i, j ) == BoardStatus.SEA){
+			this.setBoardStatus(i, j, BoardStatus.MISS);
+		}else if(this.getBoardStatus( i, i ) == BoardStatus.SHIP){
+			this.setBoardStatus(i, i, BoardStatus.BOOM);
 		}
 	},
 
@@ -161,13 +172,34 @@ BoardUI.prototype= {
 
 		for (i=0;i<this.board1.getBoardLength();i++){
 			for (j=0;j<this.board1.getBoardLength();j++){
-				$("#player1").append("<input type='image' src='picture/point.jpg'>");
-				$("#player2").append("<input type='image' src='picture/point.jpg'>");
+				$("#player1").append("<input type='image'"+"id='player1_"+i+j"' src='picture/point.jpg'>");
+				$("#player2").append("<input type='image'"+"id='player2_"+i+j"' src='picture/point.jpg'>");
 			}
 			$("#player1").append("<br>");
 			$("#player2").append("<br>");
 		}
 		
 	}
+    
+    setIconAsShip: function(iconTagID){
+        $("#"+iconTagID).attr("src","picture/point.jpg");
+    }
+    
+    combineUIAndSetShip: function(){
+    
+        // which board will be set, player1 or player2 .
+        var playerIdPrefix="player"+window.playerId+"_";
+        
+        for(i = 0; i < window.MAXSHIPCOUNT ;i++){
+            for(j = 0; j < window.MAXSHIPCOUNT;j++){
+                $("#"+playerIdPrefix+i+j).click( function() {
+                    testAndSetShip(i,j);  
+                });
+            }
+        }
+
+    }
+    
+    
 
 };
