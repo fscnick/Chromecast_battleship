@@ -160,7 +160,7 @@ testAndSetShip= function(i,j){
     if( window.playerId == '1'){
         playerBoard=window.boardui.board1;
     }else if(window.playerId == '2'){
-        playerBoard=window.boardui.board1;
+        playerBoard=window.boardui.board2;
     }else{
         setMessage("Unknow player id: " + window.playerId);
         return false;
