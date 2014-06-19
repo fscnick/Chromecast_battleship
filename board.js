@@ -182,7 +182,8 @@ BoardUI.prototype= {
     },
     
     setIconAsShip: function(iconTagID){
-        $("#"+iconTagID).attr("src","picture/point.jpg");
+	setMessage("set tagID: "+iconTagID);
+        $("#"+iconTagID).attr("src","picture/ship.jpg");
     },
     
     combineUIAndSetShip: function(){
@@ -191,10 +192,11 @@ BoardUI.prototype= {
         var playerIdPrefix="player"+window.playerId+"_";
         
         for(i = 0; i < window.MAXSHIPCOUNT ;i++){
-            for(j = 0; j < window.MAXSHIPCOUNT;j++){
-                $("#"+playerIdPrefix+i+j).click( function() {
-                    testAndSetShip(i,j);  
-                });
+            for(j = 0; j < window.MAXSHIPCOUNT;j++){ 
+		$("#"+playerIdPrefix+i+j).on('click', {posI: i, posJ: j}, function(event){
+		    testAndSetShip(event.data.posI,event.data.posJ);  		    
+		
+		});
             }
         }
 
