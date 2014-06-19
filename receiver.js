@@ -73,31 +73,65 @@ CastReceiver.prototype= {
 	    var message=JSON.parse(event.data);
 
 	    if (message.command == "join"){
-		setMessage("in handle join phase");
+            handleJoin(event);
+            /*setMessage("in handle join phase");
       
-		// players is enough.
-		if (window.playerCount==2){
-		    setMessage("Game tip: too much player!!");
-		    return;
-		}
+            // players is enough.
+            if (window.playerCount==2){
+                setMessage("Game tip: too much player!!");
+                return;
+            }
             
-		window.playerCount+=1;
-		reply=JSON.stringify({'command':"joinReply",
-				      'playerId': window.playerCount});
-		this.sendMessage(event.senderId, reply);
-		setMessage("Game tip: send a join reply with playerId "+window.playerCount);
+            window.playerCount+=1;
+            reply=JSON.stringify({'command':"joinReply",
+                                  'playerId': window.playerCount});
+            this.sendMessage(event.senderId, reply);
+            setMessage("Game tip: send a join reply with playerId "+window.playerCount);
             
-		// notify players start the ship setting phase.
-		if (window.playerCount==2){
-                    command=JSON.stringify({'command':'startSetShip'});
-                    this.broadcastMessage(command)
-		}
+            // notify players start the ship setting phase.
+            if (window.playerCount==2){
+                command=JSON.stringify({'command':'startSetShip'});
+                this.broadcastMessage(command)
+            }*/
         
-	    }
+	    }else if (message.command == "setShipComplete"){
+            
+            handleSetShipComplete();
+        
+        
+        }
         
         
 	}
 
+
+};
+
+handleJoin = function(event){
+    setMessage("in handle join phase");
+      
+    // players is enough.
+    if (window.playerCount==2){
+        setMessage("Game tip: too much player!!");
+        return false;
+    }
+            
+    window.playerCount+=1;
+    reply=JSON.stringify({'command':"joinReply",
+                          'playerId': window.playerCount});
+    this.sendMessage(event.senderId, reply);
+    setMessage("Game tip: send a join reply with playerId "+window.playerCount);
+            
+    // notify players start the ship setting phase.
+    if (window.playerCount==2){
+        command=JSON.stringify({'command':'startSetShip'});
+        this.broadcastMessage(command)
+    }
+
+};
+
+handleSetShipComplete = function(){
+    
 
 };
 
