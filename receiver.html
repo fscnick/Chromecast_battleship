@@ -4,6 +4,7 @@
     	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     	<script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     	<script src="receiver.js"></script>
+        <script src="board.js"></script>
     </head>
     <body>
 	<textarea id="textarea" rows="20" cols="70">
@@ -11,21 +12,28 @@
         </textarea>
 	<script type="text/javascript">
 	    window.onload= function(){
-		// init cast receiver
-		window.castReceiver=new CastReceiver();
+            // init cast receiver
+            window.castReceiver=new CastReceiver();
 
-		// init player counter, use for dispatch player 1 or player 2
-		window.playerCount=0;
+            // init player counter, use for dispatch player 1 or player 2
+            window.playerCount=0;
         
-	        //  init counting the set ship completion player.
-		window.playerSetShipCompleteCount=0;
-
-
-		// set textarea auto sscroll to down
-		var textArea = $("#textarea");
-		textArea.scrollTop( textArea[0].scrollHeight - textArea.height()   );
+            //  init counting the set ship completion player.
+            window.playerSetShipCompleteCount=0;
             
-            };
+            // init game board UI
+            window.b1=new Board();
+            window.b2=new Board();
+			
+            // Only init the object, draw it until two player set ship complete.
+	        window.boardui=new BoardUI(b1, b2);
+
+
+            // set textarea auto sscroll to down
+            var textArea = $("#textarea");
+            textArea.scrollTop( textArea[0].scrollHeight - textArea.height()   );
+            
+        };
         </script>
     </body>
 </html>

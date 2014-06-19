@@ -96,7 +96,7 @@ CastReceiver.prototype= {
         
 	    }else if (message.command == "setShipComplete"){
             
-		handleSetShipComplete();
+		handleSetShipComplete(this, event);
         
         
 	    }
@@ -127,11 +127,54 @@ handleJoin = function(castReceiver, event){
         command=JSON.stringify({'command':'startSetShip'});
         castReceiver.broadcastMessage(command)
     }
+    
+    return true;
 
 };
 
-handleSetShipComplete = function(){
+handleSetShipComplete = function(castReceiver, event){
+    setMessage("in handle set ship complete phase.");
     
+    var message=JSON.parse(event.data);
+    
+    
+    
+    var playerBoard = null;
+    if (message.playerId == "1"){
+        playerBoard = window.boardui.board1;
+    }else if(message.playerId == "2"){
+        playerBoard = window.boardui.board2;
+    }else {
+        setMessage("Unknow playerId: "+ message.playerId+ " on handleSetShipComplete().");
+        return false;
+    }
+    
+    // set player board status
+    window.playerSetShipCompleteCount++;
+    playerBoard.importBoard(message.boardStatus);
+    
+    // check if all player ready
+    if (window.playerSetShipCompleteCount == 2){
+        window.boardui.drawUI();
+        
+        //this is a piece code to check consistency between sender's board and receiver's board.
+        for (i = 0 ; i < window.BOARDSIZE ; i++){
+            for(j = 0; j < window.BOARDSIZE ; j++){
+            
+                // show player1 
+                window.boardui.changeIcon("1", i, j);
+                
+                // show player2
+                window.boardui.changeIcon("2", i, j);
+            }
+        }
+        
+        //TO-DO
+        // notify game start
+    
+    }
+    
+    return true;
 
 };
 
