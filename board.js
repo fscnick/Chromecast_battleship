@@ -187,6 +187,7 @@ BoardUI.prototype= {
     },
     
     changeIcon: function(playerId, i, j){
+        // check which board will be change, player1 or player2.
         var playerBoard = null;
         if (playerId == "1"){
             playerBoard= this.board1;
@@ -197,6 +198,7 @@ BoardUI.prototype= {
             return false;
         }
         
+        // change the icon according to the board status.
         var status=playerBoard.getBoardStatus(i,j);
         if (status == BoardStatus.SEA){
             $("#player"+playerId+"_"+i+j).attr("src","picture/point.jpg");
