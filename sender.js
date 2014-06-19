@@ -177,7 +177,8 @@ testAndSetShip= function(i,j){
         playerBoard.placeShipOnBoard(i,j);
         currentShipAlreadySet++;
         playerBoard.setCurrentShipCount(currentShipAlreadySet);
-        window.boardui.setIconAsShip("player"+window.playerId+"_"+i+j);
+        //window.boardui.setIconAsShip("player"+window.playerId+"_"+i+j);
+        window.boardui.changeIcon(window.playerId, i, j);
         
         // if ships already reach the MAX, notify the receiver. 
         if (currentShipAlreadySet == window.MAXSHIPCOUNT){
@@ -212,7 +213,8 @@ testAndSetShip= function(i,j){
         playerBoard.placeShipOnBoard(i,j);
         currentShipAlreadySet++;
         playerBoard.setCurrentShipCount(currentShipAlreadySet);
-        window.boardui.setIconAsShip("player"+window.playerId+"_"+i+j);
+        //window.boardui.setIconAsShip("player"+window.playerId+"_"+i+j);
+        window.boardui.changeIcon(window.playerId, i, j);
         
         // if ships already reach the MAX, notify the receiver. 
         if (currentShipAlreadySet == window.MAXSHIPCOUNT){

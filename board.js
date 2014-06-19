@@ -186,6 +186,33 @@ BoardUI.prototype= {
         $("#"+iconTagID).attr("src","picture/ship.jpg");
     },
     
+    changeIcon: function(playerId, i, j){
+        var playerBoard = null;
+        if (playerId == "1"){
+            playerBoard= this.board1;
+        }else if (playerId == "2"){
+            playerBoard= this.board2;
+        }else{
+            setMessage("Not a valid playerId!! on changeIcon()");
+            return false;
+        }
+        
+        var status=playerBoard.getBoardStatus(i,j);
+        if (status == BoardStatus.SEA){
+            $("#player"+playerId+"_"+i+j).attr("src","picture/point.jpg");
+        }else if(status == BoardStatus.SHIP){
+            $("#player"+playerId+"_"+i+j).attr("src","picture/ship.jpg");
+        }else if(status == BoardStatus.MISS){
+            $("#player"+playerId+"_"+i+j).attr("src","picture/miss.jpg");
+        }else if(status == BoardStatus.BOOM){
+            $("#player"+playerId+"_"+i+j).attr("src","picture/boom.jpg");
+        }else{
+            setMessage("Not a valid status on "+"player"+playerId+"_"+i+j+" with status: "+status);
+            return false;
+        }
+    
+    },
+    
     combineUIAndSetShip: function(){
     
         // which board will be set, player1 or player2 .
