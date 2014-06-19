@@ -73,7 +73,7 @@ CastReceiver.prototype= {
 	    var message=JSON.parse(event.data);
 
 	    if (message.command == "join"){
-            handleJoin(event);
+		handleJoin( this, event);
             /*setMessage("in handle join phase");
       
             // players is enough.
@@ -96,10 +96,10 @@ CastReceiver.prototype= {
         
 	    }else if (message.command == "setShipComplete"){
             
-            handleSetShipComplete();
+		handleSetShipComplete();
         
         
-        }
+	    }
         
         
 	}
@@ -107,7 +107,7 @@ CastReceiver.prototype= {
 
 };
 
-handleJoin = function(event){
+handleJoin = function(castReceiver, event){
     setMessage("in handle join phase");
       
     // players is enough.
@@ -119,13 +119,13 @@ handleJoin = function(event){
     window.playerCount+=1;
     reply=JSON.stringify({'command':"joinReply",
                           'playerId': window.playerCount});
-    this.sendMessage(event.senderId, reply);
+    castReceiver.sendMessage(event.senderId, reply);
     setMessage("Game tip: send a join reply with playerId "+window.playerCount);
             
     // notify players start the ship setting phase.
     if (window.playerCount==2){
         command=JSON.stringify({'command':'startSetShip'});
-        this.broadcastMessage(command)
+        castReceiver.broadcastMessage(command)
     }
 
 };
