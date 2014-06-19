@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="board.js"></script>
     </head>
     <body>		
-	<form method="get" action="">
+	<form method="get" action="Javascript:join(window.castSender);">
 	    <input id="joinBtn" type="submit"  value="join">
 	</form><br>
 	<textarea id="textarea" rows="20" cols="70">
@@ -36,9 +36,9 @@
 	        window.boardui=new BoardUI(b1, b2);
 		window.boardui.drawUI();
 			
-		$("#joinBtn").click(function(){
-		    join(window.castSender);
-		});	
+	//	$("#joinBtn").click(function(){
+	//	    join(window.castSender);
+	//	});	
 			
 	    };
 		</script>

@@ -1,5 +1,3 @@
-
-
 /** @const */
 var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 var APP_ID = 'BDF10103';
@@ -59,13 +57,23 @@ CastSender.prototype.sessionUpdateListener = function(isAlive) {
 };
 
 CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
-	setMessage("Got message: " + namespace + " " + messageString);
-    
-    if(messageString['command'] == "joinReply"){
-        handleJoinReply(messageString);
-    }else if(message['command']=="startSetShip"){
-        startSetShip();
+    setMessage("Got message: " + namespace + " " + messageString);
+   
+    message=JSON.parse(messageString);
+
+    if (message.command == "joinReply"){
+	handleJoinReply(message);
+    }else if(message.command == "startSetShip"){
+	startSetShip();
     }
+
+    //if(messageString['command'] == "joinReply"){
+    //    handleJoinReply(messageString);
+    //}else if(messageString['command']=="startSetShip"){
+    //    setMessage("aaaaaaaaaaaaa");
+	
+    //	startSetShip();
+    //}
 };
 
 CastSender.prototype.sessionListener = function(e)	{
@@ -116,9 +124,10 @@ join = function(castSender){
 };
 
 handleJoinReply = function(replyMessage) {
-
-    if (replyMessage['playerId']== '1'){
-        window.playerId='1';
+    
+   // if (replyMessage['playerId']== '1'){
+    if (replyMessage.playerId == "1"){
+	window.playerId='1';
     
         window.b1.setPlayerId("1");
         window.b1.setIsOwner(true);
@@ -127,7 +136,8 @@ handleJoinReply = function(replyMessage) {
         window.b1.setIsOwner(false);
         
         setMessage("Game tip: Your the the player 1");
-    }else if(replyMessage['playerId']== '2'){
+    //}else if(replyMessage['playerId']== '2'){
+    }else if (replyMessage.playerId == "2"){
         window.playerId='2';
         
         window.b1.setPlayerId("1");
@@ -225,10 +235,11 @@ testAndSetShip= function(i,j){
     
     
 
-}
+};
 
 startSetShip = function(){
     setMessage("Game tip: please set "+window.MAXSHIPCOUNT+" ships!");
     window.boardui.combineUIAndSetShip();
-    
+	    
 };
+
