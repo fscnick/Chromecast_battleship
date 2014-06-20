@@ -112,8 +112,8 @@ Board.prototype = {
 		
 		if (this.getBoardStatus( i, j ) == BoardStatus.SEA){
 			this.setBoardStatus(i, j, BoardStatus.MISS);
-		}else if(this.getBoardStatus( i, i ) == BoardStatus.SHIP){
-			this.setBoardStatus(i, i, BoardStatus.BOOM);
+		}else if(this.getBoardStatus( i, j ) == BoardStatus.SHIP){
+			this.setBoardStatus(i, j, BoardStatus.BOOM);
 		}
 	},
 
