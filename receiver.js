@@ -181,7 +181,7 @@ handleSetShipComplete = function(castReceiver, event){
 
 notifyGameStart= function(castReceiver){
 
-    command={JSON.stringify({'command':"gameStart"});
+    command=JSON.stringify({'command':"gameStart"});
     
     setMessage("Game tip: ready to start the game.");
     
