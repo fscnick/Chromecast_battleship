@@ -67,7 +67,10 @@ CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
         startSetShip();
     }else if(message.command == "gameStart"){
         prepareToStart();
-    
+    }else if(message.command == "move"){
+        prepareToMove(message);
+    }else if(message.command == "moveResult" ){
+        showMoveResult(message);
     }
 
     //if(messageString['command'] == "joinReply"){
@@ -281,6 +284,40 @@ testAndSetShip= function(i,j){
 
 };
 
+testThrowBomb = function(i, j){
+    
+    //  get competitor board
+    var competitorBoard=null;
+    if (window.playerId == "1"){
+        competitorBoard=window.boardui.board2;
+    }else if(window.playerId == "2"){
+        competitorBoard=window.boardui.board1;
+    }
+    
+    // test position is not bombed yet.
+    var currentStatus=competitorBoard.getBoardStatus(i, j);
+    if ( currentStatus != BoardStatus.SEA){
+        // In the player's vision, they don't know where the ship is.
+        // if this position status is unknown, that will be SEA.
+        alert("Not a valid position, please choose another!");
+        return  false;
+    }
+    
+    
+
+    
+    command=JSON.stringify({
+                    'command': "moveReply",
+                    'playerId': window.playerId,
+                    'posI': i.toString(),
+                    'posJ': j.toString());
+    window.castSender.sendMessage(command);              
+    
+    // disable all click event for waiting another.
+    window.boardui.disableClickEvent(window.playerId);
+
+}
+
 startSetShip = function(){
     setMessage("Game tip: please set "+window.MAXSHIPCOUNT+" ships!");
     window.boardui.combineUIAndSetShip();
@@ -292,3 +329,34 @@ prepareToStart = function(){
     window.boardui.disableClickEvent(window.playerId);
 
 }; 
+
+parepareToMove = function(message){
+    
+    if (message.playerId == window.playerId){
+        setMessage("Game tip: Your turn.");
+    }else{
+        setMessage("Game tip: player"+message.playerId+"'s turn, please wait.");
+    }
+    
+    window.boardui.combineUIAndThrowBomb();
+
+};
+
+showMoveResult = function(message){
+
+    // get target board
+    var targetBoard = null;
+    if (message.targetBoard == "1"){
+        targetBoard=window.boardui.board1;
+    }else if(message.targetBoard == "2"){
+        targetBoard=window.boardui.board2;
+    }else{
+        setMessage("Unknow target board in showMoveResult.");
+        return false;
+    }
+    
+    // update position status
+    targetBoard.setBoardStatus(message.posI, message.posJ, message.posResult);
+    window.boardui.changeIcon(message.targetBoard, message.posI, message.posJ);
+    
+};

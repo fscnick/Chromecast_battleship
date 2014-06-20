@@ -64,42 +64,16 @@ CastReceiver.prototype= {
 
 	MsgBusOnMessage : function(event) {
 	    setMessage('Get Message [' + event.senderId + ']: ' + event.data);
-		
-		// inform all senders on the CastMessageBus of the incoming message event
-		// sender message listener will be invoked
-		//this.sendMessage(event.senderId, event.data);
-		//this.broadcastMessage(event.data);
         
 	    var message=JSON.parse(event.data);
 
 	    if (message.command == "join"){
-		handleJoin( this, event);
-            /*setMessage("in handle join phase");
-      
-            // players is enough.
-            if (window.playerCount==2){
-                setMessage("Game tip: too much player!!");
-                return;
-            }
-            
-            window.playerCount+=1;
-            reply=JSON.stringify({'command':"joinReply",
-                                  'playerId': window.playerCount});
-            this.sendMessage(event.senderId, reply);
-            setMessage("Game tip: send a join reply with playerId "+window.playerCount);
-            
-            // notify players start the ship setting phase.
-            if (window.playerCount==2){
-                command=JSON.stringify({'command':'startSetShip'});
-                this.broadcastMessage(command)
-            }*/
-        
+            handleJoin( this, event);
 	    }else if (message.command == "setShipComplete"){
-            
-		handleSetShipComplete(this, event);
-        
-        
-	    }
+            handleSetShipComplete(this, event);
+	    }else if(message.command == "moveReply"){
+            handleMove(this, event);
+        }
         
         
 	}
@@ -208,5 +182,47 @@ informPlayerToMove = function(castReceiver){
     
     return true;
 
+};
+
+handleMove= function(castReceiver, event){
+    setMessage("In handle move phase!");
+    
+    var message=JSON.parse(event.data);
+    
+    // get the target board to bomb.
+    var targetBoard=null;
+    var targetPlayerId=null;
+    if (message.playerId == "1"){
+        targetBoard=window.boardui.board2;
+        targetPlayerId="2";
+    }else if (message.playerId == "2"){
+        targetBoard=window.boardui.board1;
+        targetPlayerId="1";
+    }else{
+        setMessage("Unknown playerId in handleMove()");
+        return false;
+    }
+    
+    // throw a bomb
+    targetBoard.throwBomb(message.posI, message.posJ);
+    window.boardui.changeIcon(targetPlayerId, i, j);
+    
+    // broadcast the result to player.
+    var resultStatus=targetBoard.getBoardStatus(message.posI, message.posJ);
+    command=JSON.stringify({
+                    'command':"moveResult",
+                    'targetBoard': targetPlayerId,
+                    'posI': message.posI,
+                    'posJ': message.posJ,
+                    'posResult': resultStatus
+    });
+    
+    castReceiver.broadcastMessage(command);
+    
+    //TO-DO
+    // check win or not
+    
+    //TO-DO
+    // notify another player's turn
 };
 

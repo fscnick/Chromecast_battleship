@@ -231,6 +231,27 @@ BoardUI.prototype= {
 
     },
     
+    combineUIAndThrowBomb: function(){
+        var competitorPlayerId=null;
+        if (window.playerId == "1"){
+            competitorPlayerId="2";
+        }else if (window.playerId == "2"){
+            competitorPlayerId="1";
+        }
+        
+        var competitorPlayerIdPrefix="player"+competitorPlayerId+"_";
+        
+        for(i = 0; i < window.MAXSHIPCOUNT ;i++){
+            for(j = 0; j < window.MAXSHIPCOUNT;j++){ 
+                $("#"+playerIdPrefix+i+j).on('click', {posI: i, posJ: j}, function(event){
+                    testThrowBomb(event.data.posI,event.data.posJ);  		    
+		
+                });
+            }
+        }
+    
+    },
+    
     disableClickEvent: function(playerId){
     
         // which board will be clear, player1 or player2 .
