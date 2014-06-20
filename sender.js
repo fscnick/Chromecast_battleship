@@ -15,6 +15,10 @@ CastSender = function() {
 
 setMessage	= function( message ){
 	$("#textarea").append( message + "\n" );
+    
+    // set textarea auto scroll to down
+    var textArea = $("#textarea");
+	textArea.scrollTop( textArea[0].scrollHeight - textArea.height()   );
 };
 
 CastSender.prototype.sendMessageOnSuccess = function (message){
