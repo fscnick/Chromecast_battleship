@@ -238,9 +238,8 @@ BoardUI.prototype= {
         
         for(i = 0; i < window.MAXSHIPCOUNT ;i++){
             for(j = 0; j < window.MAXSHIPCOUNT;j++){ 
-            
                 // clear all delegated click handlers.
-                $("#"+playerIdPrefix+i+j).on('click',"**");
+                $("#"+playerIdPrefix+i+j).off();
             }
         }
     
