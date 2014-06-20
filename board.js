@@ -243,7 +243,7 @@ BoardUI.prototype= {
         
         for(i = 0; i < window.MAXSHIPCOUNT ;i++){
             for(j = 0; j < window.MAXSHIPCOUNT;j++){ 
-                $("#"+playerIdPrefix+i+j).on('click', {posI: i, posJ: j}, function(event){
+                $("#"+competitorPlayerIdPrefix+i+j).on('click', {posI: i, posJ: j}, function(event){
                     testThrowBomb(event.data.posI,event.data.posJ);  		    
 		
                 });

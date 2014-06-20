@@ -310,7 +310,7 @@ testThrowBomb = function(i, j){
                     'command': "moveReply",
                     'playerId': window.playerId,
                     'posI': i.toString(),
-                    'posJ': j.toString());
+                    'posJ': j.toString()});
     window.castSender.sendMessage(command);              
     
     // disable all click event for waiting another.
@@ -330,7 +330,7 @@ prepareToStart = function(){
 
 }; 
 
-parepareToMove = function(message){
+prepareToMove = function(message){
     
     if (message.playerId == window.playerId){
         setMessage("Game tip: Your turn.");

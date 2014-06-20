@@ -205,7 +205,7 @@ handleMove= function(castReceiver, event){
     
     // throw a bomb
     targetBoard.throwBomb(message.posI, message.posJ);
-    window.boardui.changeIcon(targetPlayerId, i, j);
+    window.boardui.changeIcon(targetPlayerId, message.posI, message.posJ);
     
     // broadcast the result to player.
     var resultStatus=targetBoard.getBoardStatus(message.posI, message.posJ);
