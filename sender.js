@@ -62,9 +62,12 @@ CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
     message=JSON.parse(messageString);
 
     if (message.command == "joinReply"){
-	handleJoinReply(message);
+        handleJoinReply(message);
     }else if(message.command == "startSetShip"){
-	startSetShip();
+        startSetShip();
+    }else if(message.command == "gameStart"){
+        prepareToStart();
+    
     }
 
     //if(messageString['command'] == "joinReply"){
@@ -156,7 +159,7 @@ handleJoinReply = function(replyMessage) {
 };
 
 testAndSetShip= function(i,j){
-    var playerId=null;
+    var playerBoard=null;
     if( window.playerId == '1'){
         playerBoard=window.boardui.board1;
     }else if(window.playerId == '2'){
@@ -167,39 +170,36 @@ testAndSetShip= function(i,j){
     }
     
     // check if ship is out of bound.
-        var currentShipAlreadySet=playerBoard.getCurrentShipCount();
-        if (currentShipAlreadySet >= window.MAXSHIPCOUNT){
-            setMessage("Ships already full. please wait!!");
-            return false;
-        }
+    var currentShipAlreadySet=playerBoard.getCurrentShipCount();
+    if (currentShipAlreadySet >= window.MAXSHIPCOUNT){
+        setMessage("Ships already full. please wait!!");
+        return false;
+    }
         
-        //check select position is a valid position.
-        currentStatus=playerBoard.getBoardStatus(i,j);
-        if(currentStatus != BoardStatus.SEA){
-            setMessage("Not a valid position at ("+i+","+j+")");
-            return false;
-        }
+    //check select position is a valid position.
+    currentStatus=playerBoard.getBoardStatus(i,j);
+    if(currentStatus != BoardStatus.SEA){
+        setMessage("Not a valid position at ("+i+","+j+")");
+        return false;
+    }
         
-        // set position as ship, and change the icon.
-        playerBoard.placeShipOnBoard(i,j);
-        currentShipAlreadySet++;
-        playerBoard.setCurrentShipCount(currentShipAlreadySet);
-        window.boardui.changeIcon(window.playerId, i, j);
+    // set position as ship, and change the icon.
+    playerBoard.placeShipOnBoard(i,j);
+    currentShipAlreadySet++;
+    playerBoard.setCurrentShipCount(currentShipAlreadySet);
+    window.boardui.changeIcon(window.playerId, i, j);
         
-        // if ships already reach the MAX, notify the receiver. 
-        if (currentShipAlreadySet == window.MAXSHIPCOUNT){
-            command={'command':"setShipComplete",
-                     'playerId': window.playerId,
-                     'boardStatus': playerBoard.getBoardEntireStatus()};
-            
-            window.castSender.sendMessage(command);
-        }
+    // if ships already reach the MAX, notify the receiver. 
+    if (currentShipAlreadySet == window.MAXSHIPCOUNT){
+        command={'command':"setShipComplete",
+                'playerId': window.playerId,
+                'boardStatus': playerBoard.getBoardEntireStatus()};
+           
+        window.castSender.sendMessage(command);
+    }
         
-        return true;
+    return true;
         
-
-
-
     /*if( window.playerId == '1'){
         var playerBoard=window.b1;
         
@@ -287,3 +287,8 @@ startSetShip = function(){
 	    
 };
 
+prepareToStart = function(){
+    setMessage("Game tip: prepare to start the game.");
+    window.boardui.disableClickEvent(window.playerId);
+
+}; 

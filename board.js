@@ -222,13 +222,28 @@ BoardUI.prototype= {
         
         for(i = 0; i < window.MAXSHIPCOUNT ;i++){
             for(j = 0; j < window.MAXSHIPCOUNT;j++){ 
-		$("#"+playerIdPrefix+i+j).on('click', {posI: i, posJ: j}, function(event){
-		    testAndSetShip(event.data.posI,event.data.posJ);  		    
+                $("#"+playerIdPrefix+i+j).on('click', {posI: i, posJ: j}, function(event){
+                    testAndSetShip(event.data.posI,event.data.posJ);  		    
 		
-		});
+                });
             }
         }
 
+    },
+    
+    disableClickEvent: function(playerId){
+    
+        // which board will be clear, player1 or player2 .
+        var playerIdPrefix="player"+window.playerId+"_";
+        
+        for(i = 0; i < window.MAXSHIPCOUNT ;i++){
+            for(j = 0; j < window.MAXSHIPCOUNT;j++){ 
+            
+                // clear all delegated click handlers.
+                $("#"+playerIdPrefix+i+j).on('click',"**");
+            }
+        }
+    
     }
     
     

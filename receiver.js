@@ -158,21 +158,53 @@ handleSetShipComplete = function(castReceiver, event){
         window.boardui.drawUI();
         
         //this is a piece code to check consistency between sender's board and receiver's board.
-        for (i = 0 ; i < window.BOARDSIZE ; i++){
-            for(j = 0; j < window.BOARDSIZE ; j++){
+        //for (i = 0 ; i < window.BOARDSIZE ; i++){
+        //    for(j = 0; j < window.BOARDSIZE ; j++){
             
                 // show player1 
-                window.boardui.changeIcon("1", i, j);
+        //        window.boardui.changeIcon("1", i, j);
                 
                 // show player2
-                window.boardui.changeIcon("2", i, j);
-            }
-        }
+        //        window.boardui.changeIcon("2", i, j);
+        //    }
+        //}
         
         //TO-DO
         // notify game start
+        notifyGameStart(castReceiver);
     
     }
+    
+    return true;
+
+};
+
+notifyGameStart= function(castReceiver){
+
+    command={JSON.stringify({'command':"gameStart"});
+    
+    setMessage("Game tip: ready to start the game.");
+    
+    castReceiver.broadcastMessage(command);
+    
+    // TO-DO
+    // inform player to move
+    informPlayerToMove(castReceiver);
+    
+    return true;
+
+};
+
+informPlayerToMove = function(castReceiver){
+    window.playerTurn++;
+    
+    command=JSON.stringify({'command': "move",
+             'playerId': window.playerTurn.toString()});
+    castReceiver.broadcastMessage(command);
+    
+    setMessage("Game tip: player"+window.playerTurn+"'s turn.");
+    
+    window.playerTurn = window.playerTurn % 2;
     
     return true;
 
