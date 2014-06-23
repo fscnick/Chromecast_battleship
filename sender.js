@@ -205,6 +205,8 @@ testAndSetShip= function(i,j){
                 'boardStatus': playerBoard.getBoardEntireStatus()};
            
         window.castSender.sendMessage(command);
+
+	window.boardui.disableClickEvent(window.playerId);
     }
         
     return true;
@@ -343,11 +345,11 @@ prepareToMove = function(message){
     
     if (message.playerId == window.playerId){
         setMessage("Game tip: Your turn.");
+	window.boardui.combineUIAndThrowBomb();
     }else{
         setMessage("Game tip: player"+message.playerId+"'s turn, please wait.");
     }
     
-    window.boardui.combineUIAndThrowBomb();
 
 };
 
