@@ -325,6 +325,7 @@ testThrowBomb = function(i, j){
     window.castSender.sendMessage(command);              
     
     // disable all click event for waiting another.
+    setMessage("disableClickEvent at testThrowBomb()");
     window.boardui.disableClickEvent(competitorId);
 
 }
@@ -345,7 +346,16 @@ prepareToMove = function(message){
     
     if (message.playerId == window.playerId){
         setMessage("Game tip: Your turn.");
-	window.boardui.combineUIAndThrowBomb();
+        
+        var competitorPlayerId=null;
+        if (window.playerId == "1"){
+            competitorPlayerId="2";
+        }else if (window.playerId == "2"){
+            competitorPlayerId="1";
+        }
+        
+        // you can throw bombs at competitor's board.
+        window.boardui.combineUIAndThrowBomb(competitorPlayerId);
     }else{
         setMessage("Game tip: player"+message.playerId+"'s turn, please wait.");
     }

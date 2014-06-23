@@ -223,7 +223,7 @@ handleMove= function(castReceiver, event){
     
     castReceiver.broadcastMessage(command);
     
-    //TO-DO
+
     // check win or not
     var result=targetBoard.checkGameOver();
     if (result){
@@ -235,10 +235,8 @@ handleMove= function(castReceiver, event){
                     });
         castReceiver.broadcastMessage(command);
         
-        //TO-DO
         // show the board current status
         window.boardui.showAllIcon();
-    
     }
     
     //TO-DO
