@@ -77,15 +77,10 @@ CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
         showMoveResult(message);
     }else if(message.command == "gameOver"){
         handleGameOver(message);
+    }else{
+        setMessage("Unknow command: "+message);
     }
 
-    //if(messageString['command'] == "joinReply"){
-    //    handleJoinReply(messageString);
-    //}else if(messageString['command']=="startSetShip"){
-    //    setMessage("aaaaaaaaaaaaa");
-	
-    //	startSetShip();
-    //}
 };
 
 CastSender.prototype.sessionListener = function(e)	{
@@ -139,24 +134,36 @@ handleJoinReply = function(replyMessage) {
     
    // if (replyMessage['playerId']== '1'){
     if (replyMessage.playerId == "1"){
-	window.playerId='1';
+        window.playerId='1';
     
-        window.b1.setPlayerId("1");
+        /*window.b1.setPlayerId("1");
         window.b1.setIsOwner(true);
         
         window.b1.setPlayerId("2");
-        window.b1.setIsOwner(false);
+        window.b1.setIsOwner(false);*/
+        
+        window.boardui.board1.setPlayerId("1");
+        window.boardui.board1.setIsOwner(true);
+        
+        window.boardui.board1.setPlayerId("2");
+        window.boardui.board1.setIsOwner(false);
         
         setMessage("Game tip: Your the the player 1");
     //}else if(replyMessage['playerId']== '2'){
     }else if (replyMessage.playerId == "2"){
         window.playerId='2';
         
-        window.b1.setPlayerId("1");
+        /*window.b1.setPlayerId("1");
         window.b1.setIsOwner(false);
         
         window.b1.setPlayerId("2");
-        window.b1.setIsOwner(true);
+        window.b1.setIsOwner(true);*/
+        
+        window.boardui.board2.setPlayerId("1");
+        window.boardui.board2.setIsOwner(false);
+        
+        window.boardui.board2.setPlayerId("2");
+        window.boardui.board2.setIsOwner(true);
         
         setMessage("Game tip: Your the the player 2");
     }else{

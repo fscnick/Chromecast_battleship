@@ -77,6 +77,8 @@ CastReceiver.prototype= {
             handleSetShipComplete(this, event);
 	    }else if(message.command == "moveReply"){
             handleMove(this, event);
+        }else{
+            setMessage("Unknow command: "+ message);
         }
         
         
@@ -134,21 +136,7 @@ handleSetShipComplete = function(castReceiver, event){
     // check if all player ready
     if (window.playerSetShipCompleteCount == 2){
         window.boardui.drawUI();
-        
-        //this is a piece code to check consistency between sender's board and receiver's board.
-        //for (i = 0 ; i < window.BOARDSIZE ; i++){
-        //    for(j = 0; j < window.BOARDSIZE ; j++){
-            
-                // show player1 
-        //        window.boardui.changeIcon("1", i, j);
-                
-                // show player2
-        //        window.boardui.changeIcon("2", i, j);
-        //    }
-        //}
-        
-        //TO-DO
-        // notify game start
+
         notifyGameStart(castReceiver);
     
     }

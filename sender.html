@@ -13,33 +13,30 @@
 	<textarea id="textarea" rows="20" cols="70">
 	    Hellow world!!
 	</textarea><br>
-	<form method="get" action="JavaScript:update();">
+	<!--<form method="get" action="JavaScript:update();">
 	    <input id="inputText" type="text" size="30" text="">
 	</form><br>
-	<script type="text/javascript">
+	-->
+    <script type="text/javascript">
 	    window.onload= function() {
 
 
-		// lunch the cast sender
-		window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
-		    if (loaded) {
-			window.castSender= new CastSender();
-			window.castSender.initializeCastApi();
-		    } else {
-			setMessage("Init Error: "+JSON.stringify(errorInfo));
-		    }
-		});
+            // lunch the cast sender
+            window['__onGCastApiAvailable'] = (function(loaded, errorInfo) {
+                if (loaded) {
+                    window.castSender= new CastSender();
+                    window.castSender.initializeCastApi();
+                } else {
+                    setMessage("Init Error: "+JSON.stringify(errorInfo));
+                }
+            });
 	
-		// init game board UI
-		window.b1=new Board();
-		window.b2=new Board();
+            // init game board UI
+            window.b1=new Board();
+            window.b2=new Board();
 				
 	        window.boardui=new BoardUI(b1, b2);
-		window.boardui.drawUI();
-			
-	//	$("#joinBtn").click(function(){
-	//	    join(window.castSender);
-	//	});	
+            window.boardui.drawUI();
 			
 	    };
 		</script>
