@@ -205,8 +205,6 @@ testAndSetShip= function(i,j){
                 'boardStatus': playerBoard.getBoardEntireStatus()};
            
         window.castSender.sendMessage(command);
-
-	window.boardui.disableClickEvent(window.playerId);
     }
         
     return true;
@@ -325,7 +323,7 @@ testThrowBomb = function(i, j){
     window.castSender.sendMessage(command);              
     
     // disable all click event for waiting another.
-    setMessage("disableClickEvent at testThrowBomb()");
+    setMessage("disableClickEvent at testThrowBomb(): competitorId "+competitorId);
     window.boardui.disableClickEvent(competitorId);
 
 }
