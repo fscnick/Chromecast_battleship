@@ -1,4 +1,4 @@
-
+ 
 
 /** @const */
 var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
