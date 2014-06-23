@@ -116,6 +116,24 @@ Board.prototype = {
 			this.setBoardStatus(i, j, BoardStatus.BOOM);
 		}
 	},
+    
+    checkGameOver : function() {
+        var boomCount=0;
+        for (i=0;i<window.BOARDSIZE;i++){
+			for(j=0;j<window.BOARDSIZE;j++){
+				if (this.getBoardStatus( i, j) == BoardStatus.BOOM){
+                    boomCount++;
+                }
+			}
+		}
+        
+        // all ship has been bombed.
+        if (boomCount == window.MAXSHIPCOUNT){
+            return true;
+        }
+        
+        return false;
+    }
 
 }
 
@@ -211,6 +229,17 @@ BoardUI.prototype= {
         }else{
             setMessage("Not a valid status on "+"player"+playerId+"_"+i+j+" with status: "+status);
             return false;
+        }
+    
+    },
+    
+    showAllIcon : function(){
+        for(i = 0 ; i<window.BOARDSIZE;i++){
+            for(j = 0;j<window.BOARDSIZE;j++){
+                this.changeIcon("1", i, j);
+                this.changeIcon("2", i, j);
+            }
+        
         }
     
     },

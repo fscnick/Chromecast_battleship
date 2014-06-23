@@ -225,6 +225,21 @@ handleMove= function(castReceiver, event){
     
     //TO-DO
     // check win or not
+    var result=targetBoard.checkGameOver();
+    if (result){
+        command=JSON.stringify({
+                    'command': "gameOver",
+                    'win': message.playerId,
+                    'player1': window.boardui.board1.getBoardEntireStatus(),
+                    'palyer2': window.boardui.board2.getBoardEntireStatus()
+                    });
+        castReceiver.broadcastMessage(command);
+        
+        //TO-DO
+        // show the board current status
+        window.boardui.showAllIcon();
+    
+    }
     
     //TO-DO
     // notify another player's turn

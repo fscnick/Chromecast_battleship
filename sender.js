@@ -75,6 +75,8 @@ CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
         prepareToMove(message);
     }else if(message.command == "moveResult" ){
         showMoveResult(message);
+    }else if(message.command == "gameOver"){
+        handleGameOver(message);
     }
 
     //if(messageString['command'] == "joinReply"){
@@ -363,4 +365,21 @@ showMoveResult = function(message){
     targetBoard.setBoardStatus(message.posI, message.posJ, message.posResult);
     window.boardui.changeIcon(message.targetBoard, message.posI, message.posJ);
     
+};
+
+handleGameOver = function(message){
+
+    // import final state of two board, because some status may not know by players.
+    window.boardui.board1.importBoard(message.player1);
+    window.boardui.board2.importBoard(message.player2);
+    
+    window.boardui.showAllIcon();
+    
+    setMessage("Game tip: Game End!!!");
+    if(message.win == window.playerId){
+        alert("You win!");
+    }else{
+        alert("You lose.");
+    }
+
 };
