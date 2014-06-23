@@ -242,6 +242,8 @@ handleMove= function(castReceiver, event){
     }
     
     //TO-DO
-    // notify another player's turn
+    // inform another player's turn
+    informPlayerToMove(castReceiver)
 };
+
 

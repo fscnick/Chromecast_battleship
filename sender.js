@@ -294,10 +294,13 @@ testThrowBomb = function(i, j){
     
     //  get competitor board
     var competitorBoard=null;
+    var competitorId=null;
     if (window.playerId == "1"){
         competitorBoard=window.boardui.board2;
+        competitorId="2";
     }else if(window.playerId == "2"){
         competitorBoard=window.boardui.board1;
+        competitorId="1";
     }
     
     // test position is not bombed yet.
@@ -320,7 +323,7 @@ testThrowBomb = function(i, j){
     window.castSender.sendMessage(command);              
     
     // disable all click event for waiting another.
-    window.boardui.disableClickEvent(window.playerId);
+    window.boardui.disableClickEvent(competitorId);
 
 }
 
