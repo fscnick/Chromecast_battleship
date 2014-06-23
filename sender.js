@@ -3,7 +3,7 @@ var MSG_NAMESPACE = 'urn:x-cast:com.google.cast.demo.battleship';
 var APP_ID = 'BDF10103';
 window.castSender=null;
 window.playerId="None";
-
+window.DEBUG=false;
 update = function () {
 		window.castSender.sendMessage($("#inputText").val());
 };
@@ -22,7 +22,7 @@ setMessage	= function( message ){
 };
 
 CastSender.prototype.sendMessageOnSuccess = function (message){
-	setMessage("Success Message sent: " + JSON.stringify(message));
+    if(window.DEBUG) setMessage("Success Message sent: " + JSON.stringify(message));
     
     if (message['command']== "join"){
         setMessage("Game tip: Send the join message, wait another player!!");
@@ -30,7 +30,7 @@ CastSender.prototype.sendMessageOnSuccess = function (message){
 };
 
 CastSender.prototype.sendMessageOnError = function (message){
-	setMessage("Error Message sent: " + JSON.stringify(message));
+    if(window.DEBUG) setMessage("Error Message sent: " + JSON.stringify(message));
     
     if (message['command']== "join"){
         setMessage("Game tip: Send the join message, but error on sending.");
@@ -61,7 +61,7 @@ CastSender.prototype.sessionUpdateListener = function(isAlive) {
 };
 
 CastSender.prototype.onReceiverMessage = function(namespace, messageString) {
-    setMessage("Got message: " + namespace + " " + messageString);
+    if(window.DEBUG) setMessage("Got message: " + namespace + " " + messageString);
    
     message=JSON.parse(messageString);
 
@@ -136,12 +136,6 @@ handleJoinReply = function(replyMessage) {
     if (replyMessage.playerId == "1"){
         window.playerId='1';
     
-        /*window.b1.setPlayerId("1");
-        window.b1.setIsOwner(true);
-        
-        window.b1.setPlayerId("2");
-        window.b1.setIsOwner(false);*/
-        
         window.boardui.board1.setPlayerId("1");
         window.boardui.board1.setIsOwner(true);
         
@@ -152,12 +146,6 @@ handleJoinReply = function(replyMessage) {
     //}else if(replyMessage['playerId']== '2'){
     }else if (replyMessage.playerId == "2"){
         window.playerId='2';
-        
-        /*window.b1.setPlayerId("1");
-        window.b1.setIsOwner(false);
-        
-        window.b1.setPlayerId("2");
-        window.b1.setIsOwner(true);*/
         
         window.boardui.board2.setPlayerId("1");
         window.boardui.board2.setIsOwner(false);
@@ -251,7 +239,6 @@ testThrowBomb = function(i, j){
     window.castSender.sendMessage(command);              
     
     // disable all click event for waiting another.
-    setMessage("disableClickEvent at testThrowBomb(): competitorId "+competitorId);
     window.boardui.disableClickEvent(competitorId);
 
 }
