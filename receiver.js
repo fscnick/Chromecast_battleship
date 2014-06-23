@@ -231,7 +231,7 @@ handleMove= function(castReceiver, event){
                     'command': "gameOver",
                     'win': message.playerId,
                     'player1': window.boardui.board1.getBoardEntireStatus(),
-                    'palyer2': window.boardui.board2.getBoardEntireStatus()
+                    'player2': window.boardui.board2.getBoardEntireStatus()
                     });
         castReceiver.broadcastMessage(command);
         
