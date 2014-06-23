@@ -134,6 +134,8 @@ join = function(castSender){
              
     castSender.sendMessage(command);
     
+    refreshBoardAndUI();
+    
 };
 
 handleJoinReply = function(replyMessage) {
@@ -316,4 +318,13 @@ handleGameOver = function(message){
         alert("You lose.");
     }
 
+};
+
+refreshBoardAndUI= function(){
+    // init game board UI
+    window.b1=new Board();
+    window.b2=new Board();
+				
+	window.boardui=new BoardUI(b1, b2);
+    window.boardui.drawUI();
 };
