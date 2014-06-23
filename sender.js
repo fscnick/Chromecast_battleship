@@ -26,6 +26,9 @@ CastSender.prototype.sendMessageOnSuccess = function (message){
     
     if (message['command']== "join"){
         setMessage("Game tip: Send the join message, wait another player!!");
+    }else if(message['command']== "setShipComplete"){
+    }else if(message['command']== "moveReply"){
+    }else{
     }
 };
 
@@ -34,6 +37,9 @@ CastSender.prototype.sendMessageOnError = function (message){
     
     if (message['command']== "join"){
         setMessage("Game tip: Send the join message, but error on sending.");
+    }else if(message['command']== "setShipComplete"){
+    }else if(message['command']== "moveReply"){
+    }else{
     }
 };
 
