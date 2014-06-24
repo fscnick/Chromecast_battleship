@@ -162,6 +162,9 @@ BoardUI= function(board1, board2){
 
 BoardUI.prototype= {
     drawUI: function(){
+    
+    // clear previous board if exists.
+    $("#boardUI").remove();
 	
 	// set players board wrapper
 	$("#textarea").after("<br>\n"+
