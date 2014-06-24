@@ -321,6 +321,8 @@ handleGameOver = function(message){
 };
 
 refreshBoardAndUI= function(){
+    window.boardui.destroyUI();
+    
     // init game board UI
     window.b1=new Board();
     window.b2=new Board();
